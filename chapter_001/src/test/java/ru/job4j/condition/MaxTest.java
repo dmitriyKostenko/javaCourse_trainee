@@ -22,4 +22,16 @@ public class MaxTest {
         int result = Max.max(5, 5);
         assertThat(result, is(5));
     }
+
+    @Test
+    public void whenMax3And5And7Then7() {
+        int result = Max.max(3, 5, 7);
+        assertThat(result, is(7));
+    }
+
+    @Test
+    public void whenMax5And5And3Then5() {
+        int result = Max.max(5, 5, 3);
+        assertThat(result, is(5));
+    }
 }
