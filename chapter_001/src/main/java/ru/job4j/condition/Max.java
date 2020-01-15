@@ -10,4 +10,10 @@ public class Max {
                 first,
                 max(second, third));
     }
+
+    public static int max(int first, int second, int third, int forth) {
+        return max(
+                first,
+                max(second, third, forth));
+    }
 }

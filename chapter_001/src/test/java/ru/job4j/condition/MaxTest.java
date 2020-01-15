@@ -34,4 +34,16 @@ public class MaxTest {
         int result = Max.max(5, 5, 3);
         assertThat(result, is(5));
     }
+
+    @Test
+    public void whenMax3And5And7And9Then9() {
+        int result = Max.max(3, 5, 7, 9);
+        assertThat(result, is(9));
+    }
+
+    @Test
+    public void whenMax5And5And3And3Then5() {
+        int result = Max.max(5, 5, 3, 3);
+        assertThat(result, is(5));
+    }
 }
