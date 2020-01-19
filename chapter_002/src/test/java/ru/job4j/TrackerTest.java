@@ -72,16 +72,13 @@ public class TrackerTest {
     }
 
     @Test
-    public void whenNotFindById() {
+    public void whenReplace() {
         Tracker tracker = new Tracker();
-        Item first = new Item("test1");
-        Item second = new Item("test2");
-        Item third = new Item("test2");
-        tracker.add(first);
-        tracker.add(second);
-        tracker.add(third);
-        Item result = tracker.findById("id");
-        Item expect = null;
-        assertThat(result, is(expect));
+        Item bug = new Item("Bug");
+        tracker.add(bug);
+        String id = bug.getId();
+        Item bugWithDesc = new Item("Bug with description");
+        tracker.replace(id, bugWithDesc);
+        assertThat(tracker.findById(id).getName(), is("Bug with description"));
     }
 }
