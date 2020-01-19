@@ -57,12 +57,24 @@ public class Tracker {
     }
 
     public Item findById(String id) {
-        return items[indexOf(id)];
+        if (indexOf(id) != -1) {
+            return items[indexOf(id)];
+        }
+        return null;
     }
 
     public void replace(String id, Item item) {
         int index = indexOf(id);
         item.setId(this.items[index].getId());
         this.items[index] = item;
+    }
+
+    public void delete(String id) {
+        int startPos = indexOf(id) + 1;
+        int distPos = indexOf(id);
+        int size = position - indexOf(id);
+        System.arraycopy(items, startPos, items, distPos, size);
+        items[position] = null;
+        position--;
     }
 }
