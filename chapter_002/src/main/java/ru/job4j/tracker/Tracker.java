@@ -31,16 +31,7 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        Item[] allItem = new Item[this.position];
-        int size = 0;
-        for (int i = 0; i < this.position; i++) {
-            Item item = this.items[i];
-            if (item != null) {
-                allItem[size++] = item;
-            }
-        }
-        allItem = Arrays.copyOf(allItem, size);
-        return allItem;
+        return Arrays.copyOf(items, position);
     }
 
     public Item[] findByName(String key) {
@@ -65,16 +56,20 @@ public class Tracker {
 
     public void replace(String id, Item item) {
         int index = indexOf(id);
-        item.setId(this.items[index].getId());
-        this.items[index] = item;
+        if (index != -1) {
+            item.setId(this.items[index].getId());
+            this.items[index] = item;
+        }
     }
 
     public void delete(String id) {
-        int startPos = indexOf(id) + 1;
-        int distPos = indexOf(id);
-        int size = position - indexOf(id);
-        System.arraycopy(items, startPos, items, distPos, size);
-        items[position] = null;
-        position--;
+        int index = indexOf(id);
+        if (index != -1) {
+            int startPos = index + 1;
+            int size = position - index;
+            System.arraycopy(items, startPos, items, index, size);
+            items[position] = null;
+            position--;
+        }
     }
 }
