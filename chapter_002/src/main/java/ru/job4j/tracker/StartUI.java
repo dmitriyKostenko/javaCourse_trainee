@@ -20,26 +20,35 @@ public class StartUI {
             } else if (select == 2) {
                 System.out.println("=== Edit item ====");
                 String id = input.askStr("Select item's Id: ");
-                System.out.println();
                 String name = input.askStr("Select item's new name: ");
                 Item item = new Item(name);
                 tracker.replace(id, item);
-                System.out.println("Edit item: " + item.getId() + " " + item.getName());
+                System.out.println("Item with Id " + item.getId() + " was edited. New name: " + item.getName());
             } else if (select == 3) {
                 System.out.println("=== Delete item ===");
                 String id = input.askStr("Select item's Id: ");
                 tracker.delete(id);
+                System.out.println("Item with Id " + id + " was deleted.");
             } else if (select == 4) {
                 System.out.println("=== Search item by Id ===");
                 String id = input.askStr("Select item's Id: ");
                 Item item = tracker.findById(id);
-                System.out.println("Search result: " + item.getId() + " " + item.getName());
+                if (item != null) {
+                    System.out.println("Search result: " + item.getId() + " " + item.getName());
+                } else {
+                    System.out.println("Item with same Id was not found.");
+                }
             } else if (select == 5) {
                 System.out.println("=== Search item by name ===");
-                String name = input.askStr("Select item's new name: ");
+                String name = input.askStr("Select item's name: ");
+                Item[] items = tracker.findByName(name);
                 System.out.println("Search result: ");
-                for (Item item : tracker.findByName(name)) {
-                    System.out.println(item.getId() + " " + item.getName());
+                if (items.length == 0) {
+                    System.out.println("Items with same name was not found.");
+                } else {
+                    for (Item item : items) {
+                        System.out.println(item.getId() + " " + item.getName());
+                    }
                 }
             } else if (select == 6) {
                 run = false;
