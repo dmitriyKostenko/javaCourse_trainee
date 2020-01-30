@@ -20,15 +20,23 @@ public class StartUI {
             } else if (select == 2) {
                 System.out.println("=== Edit item ====");
                 String id = input.askStr("Select item's Id: ");
-                String name = input.askStr("Select item's new name: ");
-                Item item = new Item(name);
-                tracker.replace(id, item);
-                System.out.println("Item with Id " + item.getId() + " was edited. New name: " + item.getName());
+                if (tracker.findById(id) != null) {
+                    String name = input.askStr("Select item's new name: ");
+                    Item item = new Item(name);
+                    tracker.replace(id, item);
+                    System.out.println("Item with Id " + item.getId() + " was edited. New name: " + item.getName());
+                } else {
+                    System.out.println("Item with same Id was not found.");
+                }
             } else if (select == 3) {
                 System.out.println("=== Delete item ===");
                 String id = input.askStr("Select item's Id: ");
-                tracker.delete(id);
-                System.out.println("Item with Id " + id + " was deleted.");
+                if (tracker.findById(id) != null) {
+                    tracker.delete(id);
+                    System.out.println("Item with Id " + id + " was deleted.");
+                } else {
+                    System.out.println("Item with same Id was not found.");
+                }
             } else if (select == 4) {
                 System.out.println("=== Search item by Id ===");
                 String id = input.askStr("Select item's Id: ");
