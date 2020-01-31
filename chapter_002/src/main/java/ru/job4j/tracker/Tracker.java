@@ -54,15 +54,19 @@ public class Tracker {
         return null;
     }
 
-    public void replace(String id, Item item) {
+    public boolean replace(String id, Item item) {
+        boolean exist = false;
         int index = indexOf(id);
         if (index != -1) {
             item.setId(this.items[index].getId());
             this.items[index] = item;
+            exist = true;
         }
+        return exist;
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
+        boolean exist = false;
         int index = indexOf(id);
         if (index != -1) {
             int startPos = index + 1;
@@ -70,6 +74,8 @@ public class Tracker {
             System.arraycopy(items, startPos, items, index, size);
             items[position] = null;
             position--;
+            exist = true;
         }
+        return exist;
     }
 }

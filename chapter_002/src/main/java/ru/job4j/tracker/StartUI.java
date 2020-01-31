@@ -20,10 +20,9 @@ public class StartUI {
     public static void editItem(Input input, Tracker tracker) {
         System.out.println("=== Edit item ====");
         String id = input.askStr("Select item's Id: ");
-        if (tracker.findById(id) != null) {
-            String name = input.askStr("Select item's new name: ");
-            Item item = new Item(name);
-            tracker.replace(id, item);
+        String name = input.askStr("Select item's new name: ");
+        Item item = new Item(name);
+        if (tracker.replace(id, item)) {
             System.out.println("Item with Id " + item.getId() + " was edited. New name: " + item.getName());
         } else {
             System.out.println("Item with same Id was not found.");
@@ -33,8 +32,7 @@ public class StartUI {
     public static void deleteItem(Input input, Tracker tracker) {
         System.out.println("=== Delete item ===");
         String id = input.askStr("Select item's Id: ");
-        if (tracker.findById(id) != null) {
-            tracker.delete(id);
+        if (tracker.delete(id)) {
             System.out.println("Item with Id " + id + " was deleted.");
         } else {
             System.out.println("Item with same Id was not found.");
