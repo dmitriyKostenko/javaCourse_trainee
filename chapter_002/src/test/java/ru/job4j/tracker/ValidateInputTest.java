@@ -18,13 +18,13 @@ public class ValidateInputTest {
         input.askInt("Enter");
         assertThat(
                 mem.toString(),
-                is("Please enter validate data again.\r\n")
+                is("Please enter validate data again." + System.lineSeparator())
         );
         System.setOut(out);
     }
 
     @Test
-    public void whenInvalidKey() {
+    public void whenInvalidKeyAndData() {
         ByteArrayOutputStream mem = new ByteArrayOutputStream();
         PrintStream out = System.out;
         System.setOut(new PrintStream(mem));
@@ -34,7 +34,7 @@ public class ValidateInputTest {
         input.askInt("Enter", 6);
         assertThat(
                 mem.toString(),
-                is("Please select key from menu.\r\nPlease enter validate data again.\r\n")
+                is("Please select key from menu." + System.lineSeparator() + "Please enter validate data again." + System.lineSeparator())
         );
         System.setOut(out);
     }
