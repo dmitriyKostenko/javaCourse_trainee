@@ -39,26 +39,25 @@ public class Tracker {
         List<Item> itemByName = new ArrayList<>();
         for (Item item : items) {
             if (item.getName().equals(key)) {
-                itemByName[size++] = item;
+                itemByName.add(item);
             }
         }
-        itemByName = Arrays.copyOf(itemByName, size);
         return itemByName;
     }
 
     public Item findById(String id) {
         if (indexOf(id) != -1) {
-            return items[indexOf(id)];
+            return items.get(this.indexOf(id));
         }
         return null;
     }
 
     public boolean replace(String id, Item item) {
         boolean exist = false;
-        int index = indexOf(id);
+        int index = this.indexOf(id);
         if (index != -1) {
-            item.setId(this.items[index].getId());
-            this.items[index] = item;
+            item.setId(items.get(index).getId());
+            items.set(index, item);
             exist = true;
         }
         return exist;
@@ -66,13 +65,9 @@ public class Tracker {
 
     public boolean delete(String id) {
         boolean exist = false;
-        int index = indexOf(id);
+        int index = this.indexOf(id);
         if (index != -1) {
-            int startPos = index + 1;
-            int size = position - index;
-            System.arraycopy(items, startPos, items, index, size);
-            items[position] = null;
-            position--;
+            items.remove(index);
             exist = true;
         }
         return exist;
