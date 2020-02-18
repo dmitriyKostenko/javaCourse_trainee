@@ -24,12 +24,9 @@ public class SortUser implements Comparable<SortUser> {
         int rsl = name.compareTo(o.name);
         if (rsl != 0) {
             return rsl;
+        } else {
+            return (age - o.age);
         }
-        rsl = age - o.age;
-        if (rsl != 0) {
-            return rsl / Math.abs(rsl);
-        }
-        return 0;
     }
 
     @Override
