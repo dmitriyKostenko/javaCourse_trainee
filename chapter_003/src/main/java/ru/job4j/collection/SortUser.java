@@ -11,6 +11,14 @@ public class SortUser implements Comparable<SortUser> {
         this.age = age;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
     @Override
     public int compareTo(SortUser o) {
         int rsl = name.compareTo(o.name);
