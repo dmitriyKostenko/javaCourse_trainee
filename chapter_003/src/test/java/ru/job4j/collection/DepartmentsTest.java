@@ -30,4 +30,12 @@ public class DepartmentsTest {
         List<String> expect = Arrays.asList("K1", "K1/SK1", "K1/SK1/SSK1");
         assertThat(input, is(expect));
     }
+
+    @Test
+    public void whenSortDesc() {
+        List<String> input = Arrays.asList("K1/SK2", "K1", "K2/SK1");
+        Departments.sortDesc(input);
+        List<String> expect = Arrays.asList("K2/SK1", "K1", "K1/SK2");
+        assertThat(input, is(expect));
+    }
 }
