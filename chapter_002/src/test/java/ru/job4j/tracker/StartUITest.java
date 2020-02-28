@@ -21,7 +21,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         List<UserAction> actions = new ArrayList<>();
         actions.add(action);
-        new StartUI().init(input, new Tracker(), actions);
+        new StartUI(input, new Tracker(), System.out::println).init(actions);
         assertThat(action.isCall(), is(true));
     }
 
@@ -36,7 +36,7 @@ public class StartUITest {
         StubAction action = new StubAction();
         List<UserAction> actions = new ArrayList<>();
         actions.add(action);
-        new StartUI().init(input, new Tracker(), actions);
+        new StartUI(input, new Tracker(), System.out::println).init(actions);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Menu.")
                 .add("0. Stub action")
@@ -54,7 +54,7 @@ public class StartUITest {
         Item item = new Item("fix bug");
         tracker.add(item);
         ShowAllItemsAction act = new ShowAllItemsAction();
-        act.execute(new StubInput(new String[]{}), tracker);
+        act.execute(new StubInput(new String[]{}), tracker, System.out::println);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add(item.getId() + " " + item.getName())
                 .toString();
@@ -71,7 +71,7 @@ public class StartUITest {
         Item item = new Item("fix bug");
         tracker.add(item);
         SearchByNameAction act = new SearchByNameAction();
-        act.execute(new StubInput(new String[]{"fix bug"}), tracker);
+        act.execute(new StubInput(new String[]{"fix bug"}), tracker, System.out::println);
         String expect = new StringJoiner(System.lineSeparator(), "", System.lineSeparator())
                 .add("Search result: ")
                 .add(item.getId() + " " + item.getName())

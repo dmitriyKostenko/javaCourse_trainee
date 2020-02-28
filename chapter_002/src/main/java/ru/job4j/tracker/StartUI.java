@@ -3,23 +3,33 @@ package ru.job4j.tracker;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class StartUI {
+    private final Input input;
+    private final Tracker tracker;
+    private final Consumer<String> output;
 
-    public void init(Input input, Tracker tracker, List<UserAction> actions) {
+    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
+        this.input = input;
+        this.tracker = tracker;
+        this.output = output;
+    }
+
+    public void init(List<UserAction> actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
             int select = input.askInt("Select: ", actions.size());
             UserAction action = actions.get(select);
-            run = action.execute(input, tracker);
+            run = action.execute(input, tracker, output);
         }
     }
 
     private void showMenu(List<UserAction> actions) {
-        System.out.println("Menu.");
+        output.accept("Menu.");
         for (UserAction action : actions) {
-            System.out.println(actions.indexOf(action) + ". " + action.name());
+            output.accept(actions.indexOf(action) + ". " + action.name());
         }
     }
 
@@ -36,6 +46,6 @@ public class StartUI {
                 new SearchByNameAction(),
                 new ExitAction()
         );
-        new StartUI().init(validate, tracker, actions);
+        new StartUI(validate, tracker, System.out::println).init(actions);
     }
 }

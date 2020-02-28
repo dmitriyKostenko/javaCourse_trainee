@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class SearchByNameAction implements UserAction {
     @Override
@@ -9,15 +10,15 @@ public class SearchByNameAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         String name = input.askStr("Select item's name: ");
         List<Item> items = tracker.findByName(name);
-        System.out.println("Search result: ");
+        output.accept("Search result: ");
         if (items.size() == 0) {
-            System.out.println("Items with same name was not found.");
+            output.accept("Items with same name was not found.");
         } else {
             for (Item item : items) {
-                System.out.println(item.getId() + " " + item.getName());
+                output.accept(item.getId() + " " + item.getName());
             }
         }
         return true;

@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 public class SearchByIdAction implements UserAction {
     @Override
     public String name() {
@@ -7,13 +9,13 @@ public class SearchByIdAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Tracker tracker, Consumer<String> output) {
         String id = input.askStr("Select item's Id: ");
         Item item = tracker.findById(id);
         if (item != null) {
-            System.out.println("Search result: " + item.getId() + " " + item.getName());
+            output.accept("Search result: " + item.getId() + " " + item.getName());
         } else {
-            System.out.println("Item with same Id was not found.");
+            output.accept("Item with same Id was not found.");
         }
         return true;
     }
