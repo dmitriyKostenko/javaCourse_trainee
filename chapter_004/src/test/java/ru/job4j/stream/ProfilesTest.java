@@ -22,4 +22,21 @@ public class ProfilesTest {
         List<Address> result = new Profiles().collect(profiles);
         assertThat(result.toString(), is(expected.toString()));
     }
+
+    @Test
+    public void whenSortedAndUniqueList() {
+        Address first = new Address("Taganrog", "Lenina", 38, 6);
+        Address second = new Address("Rostov", "Sadovoya", 112, 36);
+        Address third = new Address("Krasnodar", "Krasnaya", 67, 12);
+        Address fourth = new Address("Rostov", "Sadovoya", 112, 36);
+        List<Address> expected = List.of(third, second, first);
+        List<Profile> profiles = List.of(
+                new Profile(first),
+                new Profile(second),
+                new Profile(third),
+                new Profile(fourth)
+        );
+        List<Address> result = new Profiles().sortedList(profiles);
+        assertThat(result.toString(), is(expected.toString()));
+    }
 }
