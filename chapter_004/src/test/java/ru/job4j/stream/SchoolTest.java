@@ -4,7 +4,9 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
+import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -55,5 +57,11 @@ public class SchoolTest {
                 new Student("Vasilev", 45)
         );
         assertThat(result.toString(), is(expect.toString()));
+    }
+
+    @Test
+    public void whenConvertStudentsListToMap() {
+        Map<String, Student> result = new School().listToMap(students);
+        assertThat(result.values(), containsInAnyOrder(students.toArray()));
     }
 }
