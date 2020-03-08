@@ -64,4 +64,16 @@ public class SchoolTest {
         Map<String, Student> result = new School().listToMap(students);
         assertThat(result.values(), containsInAnyOrder(students.toArray()));
     }
+
+    @Test
+    public void whenLevelMoreThen50() {
+        List<Student> result = new School().levelOf(students, 50);
+        List<Student> expect = Arrays.asList(
+                new Student("Konstantinov", 55),
+                new Student("Nikolaev", 65),
+                new Student("Yuriev", 75),
+                new Student("Yakovlev", 90)
+        );
+        assertThat(result.toString(), is(expect.toString()));
+    }
 }
