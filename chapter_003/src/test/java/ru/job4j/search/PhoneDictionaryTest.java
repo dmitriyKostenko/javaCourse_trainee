@@ -12,28 +12,28 @@ import static org.junit.Assert.assertThat;
 public class PhoneDictionaryTest {
     @Test
     public void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk"));
-        ArrayList<Person> persons = phones.find("Pet");
+        var persons = phones.find("Pet");
         assertThat(persons.get(0).getSurname(), is("Arsentev"));
     }
 
     @Test
     public void whenFindByPartSurname() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk"));
-        ArrayList<Person> persons = phones.find("sent");
+        var persons = phones.find("sent");
         assertThat(persons.get(0).getName(), is("Petr"));
     }
 
     @Test
     public void whenFindByPartPhone() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk"));
-        ArrayList<Person> persons = phones.find("487");
+        var persons = phones.find("487");
         assertThat(persons.get(0).getAddress(), is("Bryansk"));
     }
 }
